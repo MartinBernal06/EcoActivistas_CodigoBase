@@ -85,4 +85,34 @@ public class ClienteController {
         return clienteDAO.eliminar(idCliente);
     }
     
+      public DefaultTableModel obtenerTablaClientes() {
+        String[] columnas = {"ID", "NOMBRE", "DIRECCIÓN", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodos();
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getDireccion(), c.getTelefonos()});
+        }
+        return modelo;
+    }
+    
+    public DefaultTableModel obtenerTablaClientesPorFiltro(String filtro) {
+        String[] columnas = {"ID", "NOMBRE", "DIRECCIÓN", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodosPorFiltro(filtro);
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getDireccion(), c.getTelefonos()});
+        }
+        return modelo;
+    }
+    
+    public DefaultTableModel obtenerTablaClientesPorFiltroModal(String filtro) {
+        String[] columnas = {"ID", "NOMBRE", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodosPorFiltro(filtro);
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getTelefonos()});
+        }
+        return modelo;
+    }
+    
 }

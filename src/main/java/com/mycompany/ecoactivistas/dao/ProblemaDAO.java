@@ -21,7 +21,7 @@ import java.util.List;
 public class ProblemaDAO implements IProblemaDAO {
     @Override
     public boolean insertar(Problema problema) {
-        String sql = "INSERT INTO Problema (fch_ini, fch_fin, estado, idCliente) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Problema (fch_ini, fch_fin, estado, idCliente, descripcion) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = ConexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -29,7 +29,7 @@ public class ProblemaDAO implements IProblemaDAO {
             ps.setDate(2, problema.getFchFin());
             ps.setString(3, problema.getEstado());
             ps.setInt(4, problema.getIdCliente());
-
+            ps.setString(5, problema.getDescripcion());
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
